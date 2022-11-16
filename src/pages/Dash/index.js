@@ -9,7 +9,14 @@ import {Link} from "found";
 import {basename, pathJoin, relPath} from "../../lib/path-join";
 import {Resizable} from "re-resizable";
 import ProfileBlock from "../../components/ProfileBlock";
-import {fetchAllCharts, fetchTextFile, fetchYamlFile, TextEditor, TextView} from "../../Charts/FileViews";
+import {
+  fetchAllCharts,
+  fetchTextFile,
+  fetchYamlFile,
+  MarkdownEditor,
+  TextEditor,
+  TextView
+} from "../../Charts/FileViews";
 import SelectedGridView from "./selected-grid-view";
 import {intersect, minus, union} from "../../lib/sigma-algebra";
 import ParameterRow from "../../Charts/ParameterRow";
@@ -279,7 +286,7 @@ export default function Dash({match, router, ..._props}) {
                 return <Resizable key={"readme-editor"}
                                   enable={{"bottom": true}}
                                   defaultSize={{width: "auto", height: 800}}
-                ><TextEditor path={pathJoin(breadCrumb.slice(-1)[0], "README.md")}/></Resizable>;
+                ><MarkdownEditor path={pathJoin(breadCrumb.slice(-1)[0], "README.md")}/></Resizable>;
               case "charts":
                 // 1. look for ".charts" in the current folder
                 // 2. add chart view to markdown
