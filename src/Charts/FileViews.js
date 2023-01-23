@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useToggle} from "react-use";
+import {useToggle, useInterval} from "react-use";
 import styled from "styled-components";
 import graphql from "babel-plugin-relay/macro";
 import {fetchQuery} from 'relay-runtime';
@@ -119,13 +119,13 @@ export function MarkdownEditor({path, content, onChange = true, ..._props}) {
     else if (!onChange) onChange = undefined;
 
     const [text, setText] = useState("");
-    useEffect(() => {
+    useInterval(() => {
         if (content !== null) return setText(content);
         fetchTextFile(path).then(({node, errors}) => {
             if (node) setText(node.text || "");
             else setText("");
         });
-    }, [path, content, setText, ...Object.values(_props)]);
+    }, [0.5]); //every 500ms
     return <>
         <article style={{
             padding: "20px 20px",
